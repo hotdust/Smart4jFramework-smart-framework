@@ -13,7 +13,7 @@ import org.smart4j.framework.util.ClassUtil;
  * Created by shijiapeng on 2016/11/4.
  */
 public class HelperLoader {
-    public static void main(String[] args) {
+    public static void init() {
         Class<?>[] classList = {
                 ClassHelper.class,
                 BeanHelper.class,
