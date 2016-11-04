@@ -6,8 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * ClassUtil Tester.
@@ -31,7 +36,7 @@ public class ClassUtilTest {
      */
     @Test
     public void testGetClassLoader() throws Exception {
-//TODO: Test goes here... 
+        Assert.assertTrue(ClassUtil.getClassLoader() instanceof ClassLoader);
     }
 
     /**
@@ -41,14 +46,6 @@ public class ClassUtilTest {
     public void testLoadClass() throws Exception {
         Class<?> cls = ClassUtil.loadClass("org.smart4j.framework.helper.ConfigHelper", false);
         System.out.println(cls.getName());
-    }
-
-    /**
-     * Method: getClassSet(String packageName)
-     */
-    @Test
-    public void testGetClassSet() throws Exception {
-//TODO: Test goes here... 
     }
 
 
@@ -69,17 +66,74 @@ public class ClassUtilTest {
      */
     @Test
     public void testAddClass() throws Exception {
-//TODO: Test goes here... 
-/* 
-try { 
-   Method method = ClassUtil.getClass().getMethod("addClass", Set<Class<?>>.class, String.class, String.class); 
-   method.setAccessible(true); 
-   method.invoke(<Object>, <Parameters>); 
-} catch(NoSuchMethodException e) { 
-} catch(IllegalAccessException e) { 
-} catch(InvocationTargetException e) { 
-} 
-*/
+
+//        String packagePath = "D:/IdeaProjects/Smart4jFramework/smart-framework/target/classes/org/smart4j/framework";
+//        String packageName = "org.smart4j.framework";
+
+        String packagePath = "D:/IdeaProjects/Smart4jFramework/smart-framework/target/classes/org/smart4j/framework";
+        String packageName = "org.smart4j.framework";
+        Set<Class<?>> rtnSet = new HashSet<Class<?>>();
+
+        Method method = ClassUtil.class.getDeclaredMethod("addClass", Set.class, String.class, String.class);
+        method.setAccessible(true);
+        method.invoke(null, rtnSet, packagePath, packageName);
+
+        System.out.println(rtnSet.size());
+    }
+
+
+    /**
+     * Method: getClassSet(String packageName)
+     */
+    @Test
+    public void testGetClassSet() throws Exception {
+//        URL url = Thread.currentThread().getContextClassLoader().getResource("org/smart4j/framework/util/test.jar");
+//        System.out.println(url);
+//        JarURLConnection jarURLConnection = ((JarURLConnection) url.openConnection());
+//        // 如果jarConnection为空，则跳过
+//        if (jarURLConnection == null) {
+//        }
+//
+//        JarFile jarFile = jarURLConnection.getJarFile();
+//        if (jarFile == null) {
+//        }
+//
+//        Enumeration<JarEntry> jarEntries = jarFile.entries();
+//        while (jarEntries.hasMoreElements()) {
+//            JarEntry jarEntry = jarEntries.nextElement();
+//            String jarEntryName = jarEntry.getName();
+//            // 如果entry不是class文件，跳过
+//            if (".class".equals(jarEntryName)) {
+//                continue;
+//            }
+//
+//            String className = jarEntryName.substring(0, jarEntryName.lastIndexOf(".")).replace("/", ".");
+//        }
+
+
+
+//        URL urlTest = new URL("file:D:/IdeaProjects/Smart4jFramework/smart-framework/target/test-classes/org/smart4j/framework/util/test.jar");
+//        URL urlTest = new URL("jar:file:D:/IdeaProjects/Smart4jFramework/smart-framework/target/test-classes/org/smart4j/framework/util/test.jar!/");
+//
+//        URL url = Thread.currentThread().getContextClassLoader().getResource("org/smart4j/framework/util/test.jar");
+//        System.out.println(url);
+//
+//        Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources("org/smart4j/framework/util");
+//        while (resources.hasMoreElements()) {
+//            URL url_1 = resources.nextElement();
+//            System.out.println(url_1);
+//        }
+
+
+        // 为了指classpath根目录下的Jar文件的测试
+//        ClassUtil.getClassSet("org/smart4j/framework/util/test.jar");
+
+
+        // 正常的测试用例
+        String packageName = "org.smart4j.framework";
+        Set<Class<?>> classSet = ClassUtil.getClassSet(packageName);
+        System.out.println(classSet.size());
+
     }
 
 } 

@@ -53,6 +53,11 @@ public class ClassUtil {
         return cls;
     }
 
+    public static Class<?> loadClass(String className) {
+        return loadClass(className, true);
+    }
+
+    // TODO: 2016/11/4 读取Jar里面的类的内容的代码还没有测试
     public static Set<Class<?>> getClassSet(String packageName) {
         // 声明返回值
         Set<Class<?>> classSet = new HashSet<Class<?>>();
@@ -147,5 +152,9 @@ public class ClassUtil {
                 addClass(classSet, subPackagePath, subPackageName);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        ClassUtil.getClassSet("javax.crypto.spec");
     }
 }
