@@ -10,10 +10,14 @@ import java.util.Map;
  * Created by shijiapeng on 2016/11/4.
  */
 public class Param {
-    private Map<String, String> paramMap;
+    private Map<String, Object> paramMap;
 
-    public Param(Map<String, String> paramMap) {
+    public Param(Map<String, Object> paramMap) {
         this.paramMap = paramMap;
+    }
+
+    public Map<String, Object> getModel() {
+        return paramMap;
     }
 
     /**
