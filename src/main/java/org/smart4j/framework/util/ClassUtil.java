@@ -39,8 +39,12 @@ public class ClassUtil {
         return Thread.currentThread().getContextClassLoader();
     }
 
+
     /**
-     * 加载类
+     *
+     * @param className 类的包名+类名（不带有.class）。Class.forname的类名参数需要是“类的包名+类名（不带有.class）”这种形式
+     * @param isInitialized
+     * @return
      */
     public static Class<?> loadClass(String className, boolean isInitialized) {
         Class<?> cls;
@@ -119,16 +123,14 @@ public class ClassUtil {
         classSet.add(cls);
     }
 
+    /**
+     *
+     * @param classSet
+     * @param packagePath 用来保存文件夹路径，利用这个路径和File类，来取得文件或文件夹。（如：D:\IdeaProjects\Smart4jFramework\smart-framework\target\classes\org\smart4j\framework\bean\Data.class）
+     * @param packageName 包的名字。当确认File实例的内容是个Class文件的话，就用这个包名字（org.smart4j.framework.bean）+类名（Data）来取得Class文件。
+     */
     private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         // 取得路径下的所有.class文件和目录
-//        File[] files = new File(packagePath).listFiles(new FileFilter() {
-//            @Override
-//            public boolean accept(File file) {
-//                boolean acceptCondition = (file.isFile() && file.getName().endsWith(".class"))
-//                        || file.isDirectory();
-//                return acceptCondition;
-//            }
-//        });
         File[] files = new File(packagePath).listFiles((File file) ->
                 (file.isFile() && file.getName().endsWith(".class"))
                 || file.isDirectory());
@@ -144,11 +146,17 @@ public class ClassUtil {
                 doAddClass(classSet, className);
             } else {
                 String subPackagePath = fileName;
+                // 把包名加到packagePath里
+                // 加入前：D:\IdeaProjects\Smart4jFramework\smart-framework\target\classes\org\smart4j\framework
+                // 加入后：D:\IdeaProjects\Smart4jFramework\smart-framework\target\classes\org\smart4j\framework\bean
                 if (StringUtil.isNotEmpty(packagePath)) {
                     subPackagePath = packagePath + "/" + subPackagePath;
                 }
 
                 String subPackageName = fileName;
+                // 把包名加到packageName里
+                // 加入前：org.smart4j.framework
+                // 加入后：org.smart4j.framework.bean
                 if (StringUtil.isNotEmpty(packageName)) {
                     subPackageName = packageName + "." + subPackageName;
                 }
