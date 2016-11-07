@@ -78,7 +78,7 @@ public class ClassUtilTest {
         method.setAccessible(true);
         method.invoke(null, rtnSet, packagePath, packageName);
 
-        System.out.println(rtnSet.size());
+        Assert.assertTrue(rtnSet.size() > 0);
     }
 
 

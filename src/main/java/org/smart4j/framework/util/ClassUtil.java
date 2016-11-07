@@ -121,14 +121,17 @@ public class ClassUtil {
 
     private static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
         // 取得路径下的所有.class文件和目录
-        File[] files = new File(packagePath).listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                boolean acceptCondition = (file.isFile() && file.getName().endsWith(".class"))
-                        || file.isDirectory();
-                return acceptCondition;
-            }
-        });
+//        File[] files = new File(packagePath).listFiles(new FileFilter() {
+//            @Override
+//            public boolean accept(File file) {
+//                boolean acceptCondition = (file.isFile() && file.getName().endsWith(".class"))
+//                        || file.isDirectory();
+//                return acceptCondition;
+//            }
+//        });
+        File[] files = new File(packagePath).listFiles((File file) ->
+                (file.isFile() && file.getName().endsWith(".class"))
+                || file.isDirectory());
 
         // TODO: 2016/11/2 看看如果files是null的话，是不是报null exception
         for (File file : files) {
