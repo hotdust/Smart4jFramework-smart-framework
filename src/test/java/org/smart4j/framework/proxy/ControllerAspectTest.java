@@ -3,6 +3,8 @@ package org.smart4j.framework.proxy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.smart4j.framework.logic.ControllerAspect;
+import org.smart4j.framework.logic.ControllerClass;
 import org.smart4j.framework.bean.Param;
 
 import java.lang.reflect.Method;
@@ -16,14 +18,14 @@ import java.util.HashMap;
 public class ControllerAspectTest {
 
 
-    Class<CustomerController> clazz;
+    Class<ControllerClass> clazz;
     Method method;
     Param[] param = {new Param(new HashMap<String, Object>())};
 
     @Before
     public void before() throws Exception {
-        clazz = CustomerController.class;
-        method = clazz.getMethod("index", Param.class);
+        clazz = ControllerClass.class;
+        method = clazz.getMethod("getMethoder", Param.class);
 
     }
 

@@ -1,9 +1,10 @@
-package org.smart4j.framework.proxy;
+package org.smart4j.framework.logic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.annotation.Controller;
+import org.smart4j.framework.proxy.AbstractProxy;
 
 import java.lang.reflect.Method;
 

@@ -1,4 +1,4 @@
-package org.smart4j.framework.helper.annotatedclass;
+package org.smart4j.framework.logic;
 
 import org.smart4j.framework.annotation.Service;
 
