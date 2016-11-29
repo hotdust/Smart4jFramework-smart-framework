@@ -1,6 +1,5 @@
 package org.smart4j.framework.proxy;
 
-import org.apache.commons.collections.FastHashMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

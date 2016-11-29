@@ -8,13 +8,18 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ *
+ * 功能：根据Class文件，成生相应的Instance，然后保存成一个Class和Instance的键值对的Map。
+ * 例如：LoginController.class和LoginController的实例
+ *
+ *
  * @Author shijiapeng
  * @Date 2016/11/4 10:26
  * Created by shijiapeng on 2016/11/4.
  */
 public class BeanHelper {
 
-    private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<Class<?>, Object>();
+    private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<>();
 
     static {
         Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
@@ -44,6 +49,12 @@ public class BeanHelper {
 
     /**
      * 设置 Bean 实例
+     * 如果Bean实例已经存在，就替换掉
+     * （在本书主，这个方法创建原因是为了AOP功能。当AOP的代理对象实例创建完后，用代理对象实例替换掉原来的实例）
+     *
+     * @param cls Class类
+     * @param obj 要替换的实例
+     * @modified 2016/11/29 上午9:58
      */
     public static void setBean(Class<?> cls, Object obj) {
         BEAN_MAP.put(cls, obj);
