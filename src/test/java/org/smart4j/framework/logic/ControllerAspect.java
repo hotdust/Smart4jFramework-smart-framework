@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.annotation.Controller;
-import org.smart4j.framework.proxy.AbstractProxy;
+import org.smart4j.framework.proxy.AspectProxy;
 
 import java.lang.reflect.Method;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * Created by shijiapeng on 2016/11/10.
  */
 @Aspect(Controller.class)
-public class ControllerAspect extends AbstractProxy {
+public class ControllerAspect extends AspectProxy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerAspect.class);
 

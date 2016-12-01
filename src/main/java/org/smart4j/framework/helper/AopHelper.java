@@ -3,6 +3,7 @@ package org.smart4j.framework.helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
+import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
 import org.smart4j.framework.proxy.ProxyManager;
 
@@ -46,7 +47,8 @@ public class AopHelper {
         // 声明返回对象
         Map<Class<?>, Set<Class<?>>> rtnMap = new HashMap<Class<?>, Set<Class<?>>>();
         // 取得代理类的集合
-        Set<Class<?>> proxyClasses = ClassHelper.getClassSetBySuper(Aspect.class);
+//        ----------------------
+        Set<Class<?>> proxyClasses = ClassHelper.getClassSetBySuper(AspectProxy.class);
         // 根据代理类的注解里的value值（也就是Aspect(contorller.class)中的controller.class），
         // 取得被代理的集合
         for (Class<?> proxyClass : proxyClasses) {
@@ -91,7 +93,8 @@ public class AopHelper {
      * @date 2016/11/29 上午9:51
      */
     private static Map<Class<?>, List<Proxy>> createTargetMap(
-            Map<Class<?>, Set<Class<?>>> proxyMap) throws IllegalAccessException, InstantiationException {
+            Map<Class<?>, Set<Class<?>>> proxyMap)
+            throws IllegalAccessException, InstantiationException {
         Map<Class<?>, List<Proxy>> rtnClasses = new HashMap<>();
 
         // 循环所有被代理的类，组成一个被代理类和它的代理们的键值对

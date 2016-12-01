@@ -1,20 +1,17 @@
 package org.smart4j.framework.helper;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.smart4j.framework.annotation.Controller;
+
 import org.smart4j.framework.annotation.Inject;
-import org.smart4j.framework.annotation.Service;
 import org.smart4j.framework.util.ArrayUtil;
 import org.smart4j.framework.util.ClassUtil;
-import org.smart4j.framework.util.CollectionUtil;
-import org.smart4j.framework.util.ReflectionUtil;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
 import java.util.Map;
-import java.util.Set;
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * ClassHelper Tester.
@@ -24,11 +21,11 @@ import java.util.Set;
  */
 public class IoCHelperTest {
 
-    @Before
+    @BeforeMethod
     public void before() throws Exception {
     }
 
-    @After
+    @AfterMethod
     public void after() throws Exception {
     }
 
@@ -65,7 +62,7 @@ public class IoCHelperTest {
                 boolean compareResult = field.get(beanInstance).getClass().getName().equals(
                         fieldInstance.getClass().getName());
                 System.out.println(compareResult);
-                Assert.assertTrue(compareResult);
+                assertTrue(compareResult);
             }
 
         }

@@ -1,8 +1,9 @@
 package org.smart4j.framework.helper;
 
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * Created by shijiapeng on 16/11/29.
@@ -10,7 +11,7 @@ import static org.junit.Assert.*;
 public class BeanHelperTest {
 
     @Test
-    public void setBean() throws Exception {
+    public void testSetBean() throws Exception {
         String firstObject = "firstObject";
         String secondObject = "secondObject";
 

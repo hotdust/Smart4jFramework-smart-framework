@@ -1,9 +1,8 @@
 package org.smart4j.framework;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.smart4j.framework.bean.Handler;
 import org.smart4j.framework.helper.*;
+import org.testng.annotations.Test;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -13,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static org.testng.AssertJUnit.*;
 
 /**
  * @Author shijiapeng

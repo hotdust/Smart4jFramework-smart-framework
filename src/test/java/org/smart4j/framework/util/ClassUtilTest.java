@@ -1,18 +1,15 @@
 package org.smart4j.framework.util;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
-import java.net.JarURLConnection;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * ClassUtil Tester.
@@ -23,11 +20,11 @@ import java.util.jar.JarFile;
  */
 public class ClassUtilTest {
 
-    @Before
+    @BeforeMethod
     public void before() throws Exception {
     }
 
-    @After
+    @AfterMethod
     public void after() throws Exception {
     }
 
@@ -36,7 +33,7 @@ public class ClassUtilTest {
      */
     @Test
     public void testGetClassLoader() throws Exception {
-        Assert.assertTrue(ClassUtil.getClassLoader() instanceof ClassLoader);
+        assertTrue(ClassUtil.getClassLoader() instanceof ClassLoader);
     }
 
     /**
@@ -58,7 +55,7 @@ public class ClassUtilTest {
         Method method = ClassUtil.class.getDeclaredMethod("doAddClass", Set.class, String.class);
         method.setAccessible(true);
         method.invoke(null, rtnSet, "org.smart4j.framework.helper.ConfigHelper");
-        Assert.assertEquals(rtnSet.size(), 1);
+        assertEquals(rtnSet.size(), 1);
     }
 
     /**
@@ -70,7 +67,7 @@ public class ClassUtilTest {
 //        String packagePath = "D:/IdeaProjects/Smart4jFramework/smart-framework/target/classes/org/smart4j/framework";
 //        String packageName = "org.smart4j.framework";
 
-        String packagePath = "D:/IdeaProjects/Smart4jFramework/smart-framework/target/classes/org/smart4j/framework";
+        String packagePath = "/Users/shijiapeng/IdeaProjects/Smart4jFramework/Smart4jFramework-smart-framework/target/classes/org/smart4j/framework";
         String packageName = "org.smart4j.framework";
         Set<Class<?>> rtnSet = new HashSet<Class<?>>();
 
@@ -78,7 +75,7 @@ public class ClassUtilTest {
         method.setAccessible(true);
         method.invoke(null, rtnSet, packagePath, packageName);
 
-        Assert.assertTrue(rtnSet.size() > 0);
+        assertTrue(rtnSet.size() > 0);
     }
 
 

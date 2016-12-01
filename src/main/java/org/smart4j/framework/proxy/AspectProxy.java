@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
  * @Date 2016/11/10 14:15
  * Created by shijiapeng on 2016/11/10.
  */
-public abstract class AbstractProxy implements Proxy {
+public abstract class AspectProxy implements Proxy {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractProxy.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AspectProxy.class);
 
     @Override
     public Object doProxy(ProxyChain proxyChain) throws Throwable {

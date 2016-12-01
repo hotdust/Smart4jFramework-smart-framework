@@ -1,14 +1,17 @@
 package org.smart4j.framework.proxy;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.smart4j.framework.logic.ControllerAspect;
 import org.smart4j.framework.logic.ControllerClass;
 import org.smart4j.framework.bean.Param;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * @Author shijiapeng
@@ -22,14 +25,14 @@ public class ControllerAspectTest {
     Method method;
     Param[] param = {new Param(new HashMap<String, Object>())};
 
-    @Before
+    @BeforeMethod
     public void before() throws Exception {
         clazz = ControllerClass.class;
         method = clazz.getMethod("getMethoder", Param.class);
 
     }
 
-    @After
+    @AfterMethod
     public void after() throws Exception {
     }
 

@@ -1,13 +1,13 @@
 package org.smart4j.framework.helper;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-import org.smart4j.framework.annotation.Controller;
+
 import org.smart4j.framework.bean.Handler;
-import org.smart4j.framework.bean.Request;
 import org.smart4j.framework.util.ClassUtil;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.*;
 
 /**
  * ControllerHelper Tester.
@@ -18,11 +18,11 @@ import org.smart4j.framework.util.ClassUtil;
  */
 public class ControllerHelperTest {
 
-    @Before
+    @BeforeMethod
     public void before() throws Exception {
     }
 
-    @After
+    @AfterMethod
     public void after() throws Exception {
     }
 
@@ -33,8 +33,8 @@ public class ControllerHelperTest {
     public void testGetHandler() throws Exception {
         ClassUtil.loadClass(ControllerHelper.class.getName());
         Handler handler = ControllerHelper.getHandler("get", "/customer");
-        Assert.assertTrue(handler.getActionMethod().getName().equals("getMethoder"));
-        Assert.assertTrue(handler.getControllerClass().getSimpleName().equals("ControllerClass"));
+        assertTrue(handler.getActionMethod().getName().equals("getMethoder"));
+        assertTrue(handler.getControllerClass().getSimpleName().equals("ControllerClass"));
     }
 
 

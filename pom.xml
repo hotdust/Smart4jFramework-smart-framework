@@ -8,6 +8,11 @@
     <artifactId>smart-framework</artifactId>
     <version>1.0.0</version>
 
+    <properties>
+        <powermock.version>1.6.6</powermock.version>
+    </properties>
+
+
     <dependencies>
         <!-- Servlet -->
         <dependency>
@@ -29,13 +34,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
             <scope>runtime</scope>
-        </dependency>
-        <!--JUnit-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
         </dependency>
         <!--SLF4J-->
         <dependency>
@@ -98,11 +96,20 @@
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
         </dependency>
-        <!--mockito-->
+
+        <!-- ========= test start ======== -->
+
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>2.0.2-beta</version>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-testng</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
         </dependency>
         <!--assertj-->
         <dependency>
@@ -112,6 +119,7 @@
             <version>3.5.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- ========= test end ======== -->
     </dependencies>
 
     <build>

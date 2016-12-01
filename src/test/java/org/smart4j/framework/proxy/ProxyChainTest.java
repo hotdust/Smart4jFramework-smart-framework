@@ -1,12 +1,13 @@
 package org.smart4j.framework.proxy;
 
 import net.sf.cglib.proxy.MethodProxy;
-import org.junit.Test;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.*;
 
 import java.util.List;
 
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
