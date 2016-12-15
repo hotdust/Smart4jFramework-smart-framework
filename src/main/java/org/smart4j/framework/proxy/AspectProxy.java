@@ -6,6 +6,12 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 
 /**
+ * 功能：实现一些切面的共通处理，例如：
+ * 1，先调用前置增强，再调用ProxyChain，最后调用后置增强
+ * 2，在1步的前后做一些处理。这些处理是钩子方法，是留给实现类实现的（如果需要）。
+ * 3，
+ *
+ *
  * @Author shijiapeng
  * @Date 2016/11/10 14:15
  * Created by shijiapeng on 2016/11/10.

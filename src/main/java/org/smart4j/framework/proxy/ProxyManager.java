@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
+ * 这个类作用就是一个工厂类（或者工具类），它把"用cglib生成生成代理对象的过程"给封装了。
+ *
  * @Author shijiapeng
  * @Date 2016/11/10 11:24
  * Created by shijiapeng on 2016/11/10.

@@ -15,6 +15,8 @@ import java.util.*;
  */
 public class AopHelper {
 
+    // TODO: 16/12/5 把从总的Class_Set取得类的动作变成用name取得呢？
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AopHelper.class);
 
     static {
@@ -46,8 +48,7 @@ public class AopHelper {
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() {
         // 声明返回对象
         Map<Class<?>, Set<Class<?>>> rtnMap = new HashMap<Class<?>, Set<Class<?>>>();
-        // 取得代理类的集合
-//        ----------------------
+        // 取得所有定义的切面类
         Set<Class<?>> proxyClasses = ClassHelper.getClassSetBySuper(AspectProxy.class);
         // 根据代理类的注解里的value值（也就是Aspect(contorller.class)中的controller.class），
         // 取得被代理的集合
