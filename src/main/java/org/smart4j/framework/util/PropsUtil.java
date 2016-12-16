@@ -22,6 +22,7 @@ public final class PropsUtil {
         Properties props = null;
         InputStream is = null;
         try {
+            System.out.println("smart.config:" + Thread.currentThread().getContextClassLoader().getResource(""));
             is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             if (is == null) {
                 throw new FileNotFoundException(fileName + " file is not found");

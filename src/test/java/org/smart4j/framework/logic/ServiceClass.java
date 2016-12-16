@@ -1,6 +1,7 @@
 package org.smart4j.framework.logic;
 
 import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.annotation.Transaction;
 
 /**
  * @Author shijiapeng
@@ -9,4 +10,9 @@ import org.smart4j.framework.annotation.Service;
  */
 @Service
 public class ServiceClass {
+
+    @Transaction
+    public void transactionMethod() {
+
+    }
 }

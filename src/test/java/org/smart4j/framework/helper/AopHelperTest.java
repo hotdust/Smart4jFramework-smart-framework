@@ -2,14 +2,20 @@ package org.smart4j.framework.helper;
 
 import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.annotation.Controller;
+import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.annotation.Transaction;
 import org.smart4j.framework.logic.ControllerAspect;
 import org.smart4j.framework.logic.ControllerClass;
 import org.smart4j.framework.proxy.Proxy;
+import org.smart4j.framework.proxy.TransactionProxy;
+import org.smart4j.framework.util.CollectionUtil;
 import org.testng.annotations.Test;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.cert.TrustAnchor;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +42,38 @@ public class AopHelperTest {
        // 判断结果集合不为空
         assertFalse(invokeResult.isEmpty());
 
+        boolean aspectProxyExists = false;
+        boolean transactionProxyExists = false;
         for (Map.Entry<Class<?>, Set<Class<?>>> entry : invokeResult.entrySet()) {
+            Class<?> key = entry.getKey();
+
+            if (key.isAnnotationPresent(Aspect.class)) {
+                aspectProxyExists = true;
+            } else if (key == TransactionProxy.class) {
+                transactionProxyExists = true;
+            } else {
+                assertFalse(true);
+            }
+        }
+
+        assertTrue(aspectProxyExists && transactionProxyExists);
+
+    }
+
+    @Test
+    public void testAddAspectProxy() throws Exception {
+        // 调用方法时传的参数
+        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        // 调用测试方法
+        Method method = AopHelper.class.getDeclaredMethod("addAspectProxy", Map.class);
+        method.setAccessible(true);
+        method.invoke(null, proxyMap);
+
+
+        // 判断结果集合不为空
+        assertFalse(proxyMap.isEmpty());
+
+        for (Map.Entry<Class<?>, Set<Class<?>>> entry : proxyMap.entrySet()) {
             // 判断key是不是带有Aspect注解的类
             Class<?> key = entry.getKey();
             assertTrue(key.isAnnotationPresent(Aspect.class));
@@ -49,10 +86,37 @@ public class AopHelperTest {
                 } else {
                     assertTrue(false);
                 }
-                System.out.println("----------------" + cls.getSimpleName());
             });
         }
 
+    }
+
+    @Test
+    public void testAddTransactionProxy() throws Exception {
+        // 调用方法时传的参数
+        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        // 调用测试方法
+        Method method = AopHelper.class.getDeclaredMethod("addTransactionProxy", Map.class);
+        method.setAccessible(true);
+        method.invoke(null, proxyMap);
+
+        // 判断结果集合不为空
+        assertFalse(proxyMap.isEmpty());
+
+        for (Map.Entry<Class<?>, Set<Class<?>>> entry : proxyMap.entrySet()) {
+            // 判断key是不是带有Aspect注解的类
+            Class<?> key = entry.getKey();
+
+            // 目标类中，带有事务注解
+            Set<Class<?>> values = entry.getValue();
+            values.forEach(cls -> {
+                if (cls.isAnnotationPresent(Service.class)) {
+                    assertTrue(true);
+                } else {
+                    assertTrue(false);
+                }
+            });
+        }
     }
 
     @Test

@@ -135,7 +135,11 @@ public class ClassUtil {
                 (file.isFile() && file.getName().endsWith(".class"))
                 || file.isDirectory());
 
-        // TODO: 2016/11/2 看看如果files是null的话，是不是报null exception
+        // 原代码中没有判断是空的情况
+        // 按正常来说，不太可能指定一个空包（包下面没有任何类）。
+        if (ArrayUtil.isEmpty(files))
+            return;
+
         for (File file : files) {
             String fileName = file.getName();
             if (file.isFile()) {

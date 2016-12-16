@@ -26,7 +26,6 @@ public class DispatcherServletTest {
 
     @Test
     public void testInit() throws ServletException {
-        // TODO: 2016/11/5
         HttpServletRequest requestMock = mock(HttpServletRequest.class);
         HttpServletResponse responseMock = mock(HttpServletResponse.class);
 
@@ -80,7 +79,6 @@ public class DispatcherServletTest {
     }
     
     public void testService() {
-        // TODO: 2016/11/5
     }
 }
 

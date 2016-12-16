@@ -3,9 +3,12 @@ package org.smart4j.framework.helper;
 import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.annotation.Controller;
 import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.annotation.Transaction;
+import org.smart4j.framework.util.ArrayUtil;
 import org.smart4j.framework.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,6 +103,42 @@ public class ClassHelper {
         for (Class<?> cls : CLASS_SET) {
             if (cls.isAnnotationPresent(annotationClass)) {
                 rtnClasses.add(cls);
+            }
+        }
+
+        return rtnClasses;
+    }
+
+    /**
+     * 返回含有特定注解的类的集合，不论注解是类级别的还是方法级别的
+     * @param annotationClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetByAnnotationOfClassOrMethod
+                                (Class<? extends Annotation> annotationClass) {
+        // 声明返回值
+        Set<Class<?>> rtnClasses = new HashSet<>();
+        // 循环所有Class，看哪个Class含有指定的annotation
+        for (Class<?> cls : CLASS_SET) {
+
+            System.out.println("SimpleName:" + cls.getSimpleName());
+
+            // 如果注解是类级别
+            if (cls.isAnnotationPresent(annotationClass)) {
+                rtnClasses.add(cls);
+                continue;
+            }
+
+            // 方法查找主方法上带没带有注解
+            Method[] methods = cls.getDeclaredMethods();
+            if (ArrayUtil.isEmpty(methods))
+                continue;
+
+            for (Method method : methods) {
+                if (method.isAnnotationPresent(Transaction.class)) {
+                    rtnClasses.add(cls);
+                    break;
+                }
             }
         }
 

@@ -55,7 +55,6 @@ public class DispatcherServlet extends HttpServlet {
         // 获取Action处理器
         Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
         if (handler == null) {
-            // TODO: 2016/11/5 如果Handler不存在，应该如何处理
             return;
         }
 
@@ -107,7 +106,7 @@ public class DispatcherServlet extends HttpServlet {
                 // TODO: 2016/11/5 这个是什么意思，测试一下
                 resp.sendRedirect(req.getContextPath() + path);
             } else {
-                Map<String, Object> model = param.getModel();
+                Map<String, Object> model = view.getModel();
                 for (Map.Entry<String, Object> entry : model.entrySet()) {
                     req.setAttribute(entry.getKey(), entry.getValue());
                 }

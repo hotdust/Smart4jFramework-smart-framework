@@ -3,9 +3,13 @@ package org.smart4j.framework.helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
+import org.smart4j.framework.annotation.Service;
+import org.smart4j.framework.annotation.Transaction;
 import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
 import org.smart4j.framework.proxy.ProxyManager;
+import org.smart4j.framework.proxy.TransactionProxy;
+import org.smart4j.framework.util.CollectionUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -40,7 +44,7 @@ public class AopHelper {
     }
 
     /**
-     * 创建代理（Proxy）和被代理对象们的键值对
+     * 创建代理（Proxy）和目标对象们的键值对
      * @Author shijiapeng
      * @date 2016/11/29 上午9:51
      * @return
@@ -48,6 +52,20 @@ public class AopHelper {
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() {
         // 声明返回对象
         Map<Class<?>, Set<Class<?>>> rtnMap = new HashMap<Class<?>, Set<Class<?>>>();
+
+        // 添加所有的切面类
+        addAspectProxy(rtnMap);
+        // 添加所有事务类(应该放到链的最后面，来只保证目标方法的事务完整性)
+        addTransactionProxy(rtnMap);
+
+        return rtnMap;
+    }
+
+    /**
+     * 添加所有切面代理类和目标对象们的Map
+     * @param proxyMap 收集用Map。把结果添加到这个Map里
+     */
+    private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
         // 取得所有定义的切面类
         Set<Class<?>> proxyClasses = ClassHelper.getClassSetBySuper(AspectProxy.class);
         // 根据代理类的注解里的value值（也就是Aspect(contorller.class)中的controller.class），
@@ -60,11 +78,24 @@ public class AopHelper {
             // 取得带有注解value值（值是一个注解）的业务类集合
             Aspect annotation = proxyClass.getAnnotation(Aspect.class);
             Set<Class<?>> targetClasses = createTargetClassSet(annotation);
-            rtnMap.put(proxyClass, targetClasses);
-
+            proxyMap.put(proxyClass, targetClasses);
         }
-        return rtnMap;
     }
+
+
+    /**
+     * 添加所有事务代理类和目标对象们的Map
+     * @param proxyMap 收集用Map。把结果添加到这个Map里
+     */
+    private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
+        Set<Class<?>> transactionTargetSet =
+                ClassHelper.getClassSetByAnnotationOfClassOrMethod(Transaction.class);
+        if (!CollectionUtil.isEmpty(transactionTargetSet))
+            proxyMap.put(TransactionProxy.class, transactionTargetSet);
+    }
+
+
+
 
     /**
      * 取得类的集合，这些类包含"指定注解里面的value值所代表的注解"
@@ -84,7 +115,7 @@ public class AopHelper {
 
 
     /**
-     * 创建被代理对象和代理们的键值对，和createProxyMap结果正相反，createProxyMap的目的就是为了创建createTargetMap。
+     * 创建目标对象和代理们的键值对，和createProxyMap结果正相反，createProxyMap的目的就是为了创建createTargetMap。
      *
      * @param proxyMap 取得类的集合，这些类包含"指定注解里面的value值所代表的注解"
      * @return
