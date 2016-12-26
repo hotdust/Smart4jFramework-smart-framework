@@ -98,7 +98,7 @@ public class ClassUtil {
                         JarEntry jarEntry = jarEntries.nextElement();
                         String jarEntryName = jarEntry.getName();
                         // 如果entry不是class文件，跳过
-                        if (".class".equals(jarEntryName)) {
+                        if (!jarEntryName.endsWith(".class")) {
                             continue;
                         }
 

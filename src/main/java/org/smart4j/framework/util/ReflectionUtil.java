@@ -31,6 +31,11 @@ public class ReflectionUtil {
         return rtnInstance;
     }
 
+    public static Object newInstance(String className) {
+        Class<?> aClass = ClassUtil.loadClass(className);
+        return newInstance(aClass);
+    }
+
     public static void setField(Object obj, Field field, Object fieldValue) {
         try {
             field.setAccessible(true);

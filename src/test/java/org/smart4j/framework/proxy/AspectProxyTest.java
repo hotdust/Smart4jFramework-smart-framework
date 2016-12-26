@@ -100,7 +100,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testError() throws Exception {
-//TODO: Test goes here...
     }
 
     /**
@@ -110,7 +109,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testAfter() throws Exception {
-//TODO: Test goes here...
     }
 
     /**
@@ -120,7 +118,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testBefore() throws Exception {
-//TODO: Test goes here...
     }
 
     /**
@@ -130,7 +127,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testBegin() throws Exception {
-//TODO: Test goes here...
     }
 
     /**
@@ -140,7 +136,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testEnd() throws Exception {
-//TODO: Test goes here...
     }
 
 
@@ -151,7 +146,6 @@ public class AspectProxyTest {
      */
     @Test
     public void testIntercept() throws Exception {
-//TODO: Test goes here...
 
     }
 }
